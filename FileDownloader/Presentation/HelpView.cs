@@ -1,6 +1,6 @@
 using System;
 
-namespace DownloadBoot.Presentation.Download
+namespace FileDownloader.Presentation.Download
 {
     internal static class HelpView
     {

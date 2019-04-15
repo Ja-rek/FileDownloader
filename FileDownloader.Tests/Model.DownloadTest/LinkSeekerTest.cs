@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
-using DownloadBoot.Download;
+using FileDownloader.Download;
 using System.Linq;
 
-namespace DownloadBot.Tests.Model.DownloadTest
+namespace FileDownloader.Tests.Model.DownloadTest
 {
     public class LinkSeekerTest 
     {

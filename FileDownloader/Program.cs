@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using DownloadBoot.Presentation.Download;
+using FileDownloader.Presentation.Download;
 
-namespace DownloadBoot
+namespace FileDownloader
 {
     class Program
     {

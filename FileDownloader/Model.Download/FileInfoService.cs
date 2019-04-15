@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 
-namespace DownloadBoot.Download
+namespace FileDownloader.Download
 {
     internal class FileInfoService
     {

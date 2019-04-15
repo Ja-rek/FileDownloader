@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace DownloadBoot.Presentation.Download
+namespace FileDownloader.Presentation.Download
 {
     internal abstract class Binder
     {

@@ -3,7 +3,7 @@ using System.IO;
 using System.Net.Http;
 using Monads;
 
-namespace DownloadBoot.Download
+namespace FileDownloader.Download
 {
     internal class HttpService
     {

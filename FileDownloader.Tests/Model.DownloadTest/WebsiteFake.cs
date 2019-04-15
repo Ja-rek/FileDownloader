@@ -1,4 +1,4 @@
-﻿namespace DownloadBot.Tests.Model.DownloadTest
+﻿namespace FileDownloader.Tests.Model.DownloadTest
 {
     public class WebsiteFake
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace DownloadBoot
+namespace FileDownloader
 {
     internal static class View
     {

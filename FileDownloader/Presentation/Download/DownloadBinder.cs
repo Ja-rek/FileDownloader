@@ -1,4 +1,4 @@
-namespace DownloadBoot.Presentation.Download
+namespace FileDownloader.Presentation.Download
 {
     internal class DownloadBinder : Binder
     {

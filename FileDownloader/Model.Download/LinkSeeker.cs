@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Monads;
 
-namespace DownloadBoot.Download
+namespace FileDownloader.Download
 {
     internal static class LinkSeeker
     {

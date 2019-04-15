@@ -2,7 +2,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Monads;
 
-namespace DownloadBoot.Download
+namespace FileDownloader.Download
 {
     internal class DownloadService
     {

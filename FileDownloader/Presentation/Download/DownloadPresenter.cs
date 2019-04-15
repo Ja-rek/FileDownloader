@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using DownloadBoot.Download;
+using FileDownloader.Download;
 
-namespace DownloadBoot
+namespace FileDownloader
 {
     internal class DownloadPresenter
     {

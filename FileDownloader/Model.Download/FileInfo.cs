@@ -1,4 +1,4 @@
-namespace DownloadBoot.Download
+namespace FileDownloader.Download
 {
     internal class FileInfo
     {

@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace DownloadBot.Tests.Presentation.Download.DownloadBinderTest
+namespace FileDownloader.Tests.Presentation.Download.DownloadBinderTest
 {
     internal class GetDownloadDirectoryTest : BinderBaseTest
     {

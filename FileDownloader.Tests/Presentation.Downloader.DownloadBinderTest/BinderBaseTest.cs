@@ -1,6 +1,6 @@
-using DownloadBoot.Presentation.Download;
+using FileDownloader.Presentation.Download;
 
-namespace DownloadBot.Tests.Presentation.Download.DownloadBinderTest
+namespace FileDownloader.Tests.Presentation.Download.DownloadBinderTest
 {
     internal abstract class BinderBaseTest
     {

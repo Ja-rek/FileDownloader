@@ -1,7 +1,7 @@
-using DownloadBoot.Download;
-using DownloadBoot.Presentation.Download;
+using FileDownloader.Download;
+using FileDownloader.Presentation.Download;
 
-namespace DownloadBoot
+namespace FileDownloader
 {
     internal static class DownloadPresenterFactory
     {

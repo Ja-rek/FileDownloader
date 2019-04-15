@@ -1,10 +1,10 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading;
-using DownloadBoot.Download;
+using FileDownloader.Download;
 using NUnit.Framework;
 
-namespace DownloadBot.Tests.Model.DownloadTest
+namespace FileDownloader.Tests.Model.DownloadTest
 {
     internal class MultiFileDownloaderTest
     {

@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DownloadBoot.Download
+namespace FileDownloader.Download
 {
     internal static class MultiFileDownloader
     {
