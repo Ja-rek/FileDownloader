@@ -11,20 +11,18 @@ namespace FileDownloader.Download
         {
             var regex = new Regex("<h2 class=\"entry-title\"(.*?)\"bookmark");
 
-            return content.Map(regex.Matches)
-                .Map(x => x.Select(y => y.Value
+            return regex.Matches(content.ValueOrEmpty())
+                .Select(y => y.Value
                     .Replace("<h2 class=\"entry-title\"><a href=\"", string.Empty)
-                    .Replace("\" rel=\"bookmark", string.Empty)))
-                .ValueOr(Enumerable.Empty<string>());
+                    .Replace("\" rel=\"bookmark", string.Empty));
         }
 
         public static IEnumerable<string> GetLinksToFiles(Maybe<string> content)
         {
-            var regex = new Regex("http:\\/\\/file.AnyPagecom\\/\\d+\\/(.*?)\\\" ta");
+            var regex = new Regex("http:\\/\\/file.AnyPage.com\\/\\d+\\/(.*?)\\\" ta");
 
-            return content.Map(regex.Matches)
-                .Map(x => x.Select(y => y.Value.Replace("\" ta", string.Empty)))
-                .ValueOr(Enumerable.Empty<string>());
+            return regex.Matches(content.ValueOrEmpty())
+                .Select(y => y.Value.Replace("\" ta", string.Empty));
         }
     }
 }

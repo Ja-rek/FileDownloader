@@ -13,7 +13,10 @@ namespace FileDownloader.Download
         {
             this.httpService = httpService;
 
-            CreateDownloadFolderIfNotExist(downloadDirectory);
+            if (!Directory.Exists(downloadDirectory)) 
+            {
+                Directory.CreateDirectory(downloadDirectory);
+            }
 
             this.downloadDirectory = downloadDirectory;
         }
@@ -35,14 +38,6 @@ namespace FileDownloader.Download
 
                 textFile.Flush(); 
             }));
-        }
-
-        private static void CreateDownloadFolderIfNotExist(string downloadDirectory)
-        {
-            if (!Directory.Exists(downloadDirectory)) 
-            {
-                Directory.CreateDirectory(downloadDirectory);
-            }
         }
     }
 }

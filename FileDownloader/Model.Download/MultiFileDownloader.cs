@@ -9,7 +9,7 @@ namespace FileDownloader.Download
         public static void DownloadAll(int taskNumber, FileInfo[] filesInfo, Action<FileInfo> downloadPolicy)
         {
             var notDownloaded = filesInfo.Where(x => !x.Exist);
-            var notDownloadedCount = filesInfo.Count();
+            var notDownloadedCount = notDownloaded.Count();
             var skip = 0;
 
             while (true)

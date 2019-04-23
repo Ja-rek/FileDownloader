@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
+using AutoFixture;
 using FileDownloader.Download;
 using NUnit.Framework;
 
@@ -12,67 +14,94 @@ namespace FileDownloader.Tests.Model.DownloadTest
         public void DownloadAll_WhenUse7FilesInfor_CallDelegatSevenTimes()
         {
             var mock = new Collection<int>();
-            var tasks = 5;
+            var tasksStub = 5;
+            var filesStub = NotExistingFilesFake(7);
 
-            MultiFileDownloader.DownloadAll(tasks, SevenFilesInfo(), x => mock.Add(0));
+            MultiFileDownloader.DownloadAll(tasksStub, filesStub, x => mock.Add(0));
 
             Assert.True(mock.Count == 7);
         }
 
         [Test]
-        public void DownloadAll_WhenRun5TasksFor7itemsInLoop_ProcessNeedAbout100MiliSecToFinish()
+        public void DownloadAll_When3FilesNotExistAnd3FilesExistOnDisk_CallDelegatSixTimes()
         {
-            var watch = new Stopwatch();
-            var tasks = 5;
+            var mock = new Collection<int>();
+            var tasksStub = 3;
+            var filesStub = NotExistingFilesFake(6).ToList();
+            filesStub.AddRange(ExistingFilesFake(6));
 
-            watch.Start();
-            MultiFileDownloader.DownloadAll(tasks, SevenFilesInfo(), x => Sleep());
-            watch.Stop();
+            MultiFileDownloader.DownloadAll(tasksStub, filesStub.ToArray(), x => mock.Add(0));
 
-            Assert.True(watch.ElapsedMilliseconds > 50);
-            Assert.True(watch.ElapsedMilliseconds < 110);
+            Assert.True(mock.Count == 6);
         }
 
         [Test]
-        public void DownloadAll_WhenAllFilesExist_ProcessNeedAbout300MiliSecToFinish()
+        public void DownloadAll_When3FilesNotExistAnd3FilesExistOnDisk_ProcessItInCorrectTime()
         {
             var watch = new Stopwatch();
-            var tasks = 1;
+            var tasksStub = 3;
+            var filesStub = NotExistingFilesFake(6).ToList();
+            filesStub.AddRange(ExistingFilesFake(6));
+
 
             watch.Start();
-            MultiFileDownloader.DownloadAll(tasks, ExistFiles(), x => Sleep());
+            MultiFileDownloader.DownloadAll(tasksStub, filesStub.ToArray(), x => SleepFor50Milliseconds());
             watch.Stop();
+            var processTime = watch.ElapsedMilliseconds; 
 
-            Assert.True(watch.ElapsedMilliseconds < 20);
+            Assert.True(processTime > 99, processTime.ToString());
+            Assert.True(processTime < 140);
         }
 
-        private void Sleep()
+
+        [Test]
+        public void DownloadAll_WhenAll7FilesNotExistOnDisk_ProcessItInCorrectTime()
+        {
+            var watch = new Stopwatch();
+            var tasksStub = 5;
+            var filesStub = NotExistingFilesFake(7);
+
+            watch.Start();
+            MultiFileDownloader.DownloadAll(tasksStub, filesStub, x => SleepFor50Milliseconds());
+            watch.Stop();
+            var processTime = watch.ElapsedMilliseconds; 
+
+            Assert.True(processTime > 99);
+            Assert.True(processTime < 140);
+        }
+
+        [Test]
+        public void DownloadAll_WhenAllFilesExistOnDisk_ProcessItInCorrectTime()
+        {
+            var watch = new Stopwatch();
+            var tasksStub = 1;
+            var filesStub = ExistingFilesFake(3);
+
+            watch.Start();
+            MultiFileDownloader.DownloadAll(tasksStub, filesStub, x => SleepFor50Milliseconds());
+            watch.Stop();
+            var processTime = watch.ElapsedMilliseconds; 
+
+            Assert.True(processTime < 20);
+        }
+
+        private void SleepFor50Milliseconds()
         {
             Thread.Sleep(50);
         }
 
-        private FileInfo[] ExistFiles()
+        private FileInfo[] ExistingFilesFake(int count)
         {
-            return new FileInfo[] 
-            {
-                new FileInfo("", "", fileExist: true),
-                new FileInfo("", "", fileExist: true),
-                new FileInfo("", "", fileExist: true),
-            };
+            var fix = new Fixture();
+            fix.Register<string, string, bool, FileInfo>((x, y, z) => new FileInfo(x, y, true));
+            return fix.CreateMany<FileInfo>(count).ToArray();
         }
 
-        private FileInfo[] SevenFilesInfo()
+        private FileInfo[] NotExistingFilesFake(int count)
         {
-            return new FileInfo[] 
-            {
-                new FileInfo("", "", false),
-                new FileInfo("", "", false),
-                new FileInfo("", "", false),
-                new FileInfo("", "", false),
-                new FileInfo("", "", false),
-                new FileInfo("", "", false),
-                new FileInfo("", "", false)
-            };
+            var fix = new Fixture();
+            fix.Register<string, string, bool, FileInfo>((x, y, z) => new FileInfo(x, y, false));
+            return fix.CreateMany<FileInfo>(count).ToArray();
         }
     }
 }

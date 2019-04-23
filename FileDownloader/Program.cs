@@ -14,9 +14,8 @@ namespace FileDownloader
                 Environment.Exit(0);
             }
 
-            var downloadPresenter = DownloadPresenterFactory.DownloadPresenter(args);
-
-            downloadPresenter.DownloadFiles();
+            DownloadPresenterFactory.DownloadPresenter(args)
+                .DownloadFiles();
         }
     }
 }
